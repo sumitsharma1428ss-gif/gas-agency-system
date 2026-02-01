@@ -522,3 +522,38 @@
 
 <!-- js file link  -->
 <script src="js/script.js"></script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDPrHfZndZjBAOd92GkoUaVQqETkP0U8HM",
+  authDomain: "apna-gas.firebaseapp.com",
+  projectId: "apna-gas",
+  storageBucket: "apna-gas.firebasestorage.app",
+  messagingSenderId: "82723828298",
+  appId: "1:82723828298:web:a002614bc101a17ad8acb3"
+};
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = form.querySelector('input[name="email"]').value;
+    const password = form.querySelector('input[name="password"]').value;
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Registration successful!");
+      window.location.href = "login.html";
+    } catch (error) {
+      alert(error.message);
+    }
+  });
+</script>
+
